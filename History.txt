@@ -1,0 +1,5 @@
+== 1.0.0 / 2012-03-02
+
+* Broke out extensions from older irongaze gem
+* Updated Url and Color classes with misc fixes
+* Added Url and Color spec coverage

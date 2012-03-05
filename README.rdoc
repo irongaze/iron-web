@@ -1,0 +1,45 @@
+= GEM: iron-web
+
+Written by Rob Morris @ Irongaze Consulting LLC (http://irongaze.com)
+
+== DESCRIPTION
+
+A set of classes useful in the generation of HTML content.
+
+== CLASSES
+
+* Url - a url parsing and manipulation class
+
+* Color - an RGB/A color manipulation class, useful in generating CSS etc.
+
+* Html / Html::Element - a builder-syntax HTML generation class set
+
+== SYNOPSIS
+
+To use:
+
+    require 'iron/web'
+
+Sample usage:
+    
+    Html.build do |html|
+      html.h1('Hello World') {|h1|
+        h1.style = "color: #{rgb('#f00').darken};"
+      }
+      
+      html.hr
+      
+      homepage = Url.parse('http://irongaze.com')
+      homepage.fragment = 'incoming'
+      html.a('Say hello to my log file', :href => homepage)
+    end
+
+== REQUIREMENTS
+
+* iron-extensions gem
+
+== INSTALL
+
+To install, simply run:
+
+    sudo gem install iron-web
