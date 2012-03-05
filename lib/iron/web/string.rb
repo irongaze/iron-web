@@ -1,13 +1,19 @@
 # Only add these changes if we're NOT running Rails
 unless ''.respond_to?(:html_safe)
 
-# Add Rails-like html safeness awareness to strings (minimal subset only!)
-class String
+# Add Rails-like html safeness awareness to objects
+class Object
   
   def html_safe?
     false
   end
+
+end
+
+# Add Rails-like html safeness awareness to strings
+class String
   
+  # Return a copy of the string marked as being html safe (ie not requiring further encoding)
   def html_safe
     HtmlSafeString.new(self)
   end

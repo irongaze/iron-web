@@ -3,3 +3,6 @@
 * Broke out extensions from older irongaze gem
 * Updated Url and Color classes with misc fixes
 * Added Url and Color spec coverage
+* Major Html::Element spec work, basic Html spec coverage
+* Add html_safe support for non-Rails environments
+* Added to GitHub

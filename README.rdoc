@@ -10,9 +10,42 @@ A set of classes useful in the generation of HTML content.
 
 * Url - a url parsing and manipulation class
 
+    >> url = Url.build('/home')
+    >> url.to_s
+    => '/home'
+    >> url.params[:key] = 'some value'
+    >> url.to_s
+    => '/home?key=some+value'
+
 * Color - an RGB/A color manipulation class, useful in generating CSS etc.
 
+    >> rgb('#f00').to_s  # Parse a color string into a Color then render it
+    => '#FF0000'
+    >> rgb('#f00').darken(0.5).to_s  # Darken bright red 50%
+    => '#800000'
+    >> rgb('#f00').blend('#0f0', 0.5).to_s  # Blend pure red and pure green, get medium yellow
+    => "#807F00"
+
 * Html / Html::Element - a builder-syntax HTML generation class set
+
+    >> html = Html.build do |html|
+    >>   html.div(:id => 'primary') {
+    >>     html.h1('Title-town!')
+    >>   }
+    >>   html.div(:id => 'secondary') {|div|
+    >>     div.style = 'text-align: center;'
+    >>     div.text! "My body text..."
+    >>   }
+    >> end
+    >> puts html
+    => <div id="primary">
+    =>   <h1>
+    =>     Title-town!
+    =>   </h1>
+    => </div>
+    => <div id="secondary" style="text-align: center;">
+    =>   My body text...
+    => </div>
 
 == SYNOPSIS
 
@@ -20,7 +53,7 @@ To use:
 
     require 'iron/web'
 
-Sample usage:
+Sample usage of all components:
     
     Html.build do |html|
       html.h1('Hello World') {|h1|
@@ -33,6 +66,19 @@ Sample usage:
       homepage.fragment = 'incoming'
       html.a('Say hello to my log file', :href => homepage)
     end
+
+Which would result in:
+
+    <h1 style="color: #CC0000;">
+      Hello World
+    </h1>
+    <hr>
+    <a href="http://irongaze.com#incoming">Say hello to my log file</a>
+
+Notice the darkened and correctly formatted CSS color value and the newly fragment-ized url.  
+HTML elements are build by calling their tag name on the Html instance.  Similarly, element
+attributes are added by calling the attribute's name on the element instance, or by simply
+setting them during construction.
 
 == REQUIREMENTS
 
