@@ -19,6 +19,9 @@
 #
 class Html
   class Element
+    # Remove everything that would normally come from Object and Kernel etc. so our attrs can be anything
+    instance_methods.each { |m| undef_method m if m =~ /^[a-z0-9]+=?$/ }
+
     # Add back in our accessors
     attr_accessor :tag, :attrs
 

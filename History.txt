@@ -1,3 +1,7 @@
+== 1.0.1 / 2012-03-30
+
+* Clear out Html::Element of kernel/object methods so attributes like 'class' can be set correctly
+
 == 1.0.0 / 2012-03-02
 
 * Broke out extensions from older irongaze gem

@@ -43,9 +43,10 @@ describe Html::Element do
   it 'should add attributes when called as setters' do
     span = Html::Element.new(:span)
     span.class = 'dynamic'
+    span.class += ' frenetic'
     span.id = 'header'
     span.attrs.keys.should include(:class, :id)
-    span.render.should == '<span class="dynamic" id="header"></span>'
+    span.render.should == '<span class="dynamic frenetic" id="header"></span>'
   end
   
   it 'should yield a block for customization on creation' do
