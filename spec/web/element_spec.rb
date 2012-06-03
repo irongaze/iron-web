@@ -49,6 +49,18 @@ describe Html::Element do
     span.render.should == '<span class="dynamic frenetic" id="header"></span>'
   end
   
+  it 'should add attributes using []=' do
+    div = Html::Element.new(:div)
+    div['foo'] = 2
+    div.attrs.keys.should include(:foo)
+    div.render.should == "\n<div foo=\"2\"></div>\n"
+  end
+  
+  it 'should allow reading attributes using []' do
+    div = Html::Element.new(:div, :bar => 'hi')
+    div[:bar].should == 'hi'
+  end
+  
   it 'should yield a block for customization on creation' do
     Html::Element.new(:span) {|span|
       span.id = 'fun'

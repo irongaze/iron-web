@@ -111,6 +111,14 @@ class Html
         super
       end
     end
+    
+    def [](key)
+      @attrs[key.to_sym]
+    end
+    
+    def []=(key, value)
+      @attrs[key.to_sym] = value
+    end
 
     def to_s
       render

@@ -1,3 +1,8 @@
+== 1.0.2 / 2012-06-03
+
+* Add ability to access attributes on elements using []/[]=
+* Add respond_to_missing? on Html so it will #respond_to?(:div) correctly
+
 == 1.0.1 / 2012-03-30
 
 * Clear out Html::Element of kernel/object methods so attributes like 'class' can be set correctly

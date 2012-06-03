@@ -113,6 +113,16 @@ class Html
       super
     end
   end
+  
+  # Make sure our objects advertise their support of tags
+  def respond_to_missing?(method, include_private)
+    parts = method.to_s.match(/^([a-z]+[0-9]?)$/)
+    if parts
+      true
+    else
+      super
+    end
+  end
 
   # Renders out as html - accepts depth param to indicate level of indentation
   def render(depth = 0, inblock = true)
