@@ -1,3 +1,7 @@
+== 1.1.1 / 2013-03-13
+
+* Handle setting Url params with keys, accessing with keys using #get_param
+
 == 1.1.0 / 2013-03-12
 
 * Fix parsing of multi-value params to be keyed without the "[]" - NOTE: BREAKING CHANGE!

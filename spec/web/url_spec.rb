@@ -104,4 +104,13 @@ describe Url do
     Url.build('/foo', 'one:two' => 'http://other.com').should == '/foo?one%3Atwo=http%3A%2F%2Fother.com'
   end
   
+  it 'should allow setting and getting using symbols or strings' do
+    u = Url.parse('/')
+    u.set_param(:bob, 4)
+    u.to_s.should == '/?bob=4'
+    u.set_param('bob', 5)
+    u.to_s.should == '/?bob=5'
+    u.get_param(:bob).should == 5
+  end
+  
 end

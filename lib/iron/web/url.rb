@@ -160,7 +160,7 @@ class Url
 
   # Override current param val or set if none
   def set_param(k, v)
-    @params[k] = v
+    @params[k.to_s] = v
   end
   
   def set_params(hash)
@@ -171,6 +171,7 @@ class Url
 
   # Add a param value (can be called multiply for the same param key)
   def add_param(k, v)
+    k = k.to_s
     oldval = @params[k]
     if oldval
       @params[k] = oldval.is_a?(Array) ? oldval + [v] :  [oldval, v]
@@ -186,9 +187,13 @@ class Url
       if key_or_regex.is_a?(Regexp)
         k.match(key_or_regex)
       else
-        k == key_or_regex
+        k == key_or_regex.to_s
       end
     end
+  end
+  
+  def get_param(k)
+    @params[k.to_s]
   end
 
   # Reset params
