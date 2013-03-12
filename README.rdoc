@@ -16,6 +16,8 @@ A set of classes useful in the generation of HTML content.
     >> url.params[:key] = 'some value'
     >> url.to_s
     => '/home?key=some+value'
+    >> url.make_absolute(false, 'google.com')
+    => 'http://google.com/home?key=some+value'
 
 * Color - an RGB/A color manipulation class, useful in generating CSS etc.
 
@@ -89,3 +91,7 @@ setting them during construction.
 To install, simply run:
 
     sudo gem install iron-web
+    
+RVM users can skip the sudo:
+
+    gem install iron-web

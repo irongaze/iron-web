@@ -1,3 +1,10 @@
+== 1.1.0 / 2013-03-12
+
+* Fix parsing of multi-value params to be keyed without the "[]" - NOTE: BREAKING CHANGE!
+* Fix rendering of multi-value params to enforce addition of "[]"
+* Add Url#set_params(hash) to allow setting multiple params at once
+* Add optional param to Url#make_absolute to allow explicitly setting the server
+
 == 1.0.2 / 2012-06-03
 
 * Add ability to access attributes on elements using []/[]=
@@ -9,9 +16,9 @@
 
 == 1.0.0 / 2012-03-02
 
-* Broke out extensions from older irongaze gem
+* Break out extensions from older irongaze gem
 * Updated Url and Color classes with misc fixes
 * Added Url and Color spec coverage
 * Major Html::Element spec work, basic Html spec coverage
 * Add html_safe support for non-Rails environments
-* Added to GitHub
+* Add to GitHub

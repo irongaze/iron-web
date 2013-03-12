@@ -63,10 +63,11 @@ class Url
       str += '?'
       str += params.collect do |k,v|
         if v.is_a?(Array)
+          k = k.gsub('[]','')
           v.collect do |vs|
             val = vs.respond_to?(:to_param) ? vs.to_param : vs
             val = val.to_s
-            CGI::escape(k.to_s) + '=' + CGI::escape(val)
+            CGI::escape(k.to_s) + '[]=' + CGI::escape(val)
           end
         else
           val = v.respond_to?(:to_param) ? v.to_param : v
@@ -103,7 +104,13 @@ class Url
     @params = {}
     params.split('&').each do |p|
       k, v = p.split('=')
-      add_param(CGI::unescape(k), CGI::unescape(v)) if k && v
+      if k && v
+        if k.ends_with?('[]')
+          add_param(CGI::unescape(k.gsub('[]','')), [CGI::unescape(v)])
+        else
+          add_param(CGI::unescape(k), CGI::unescape(v))
+        end
+      end
     end
   end
 
@@ -155,12 +162,19 @@ class Url
   def set_param(k, v)
     @params[k] = v
   end
+  
+  def set_params(hash)
+    hash.each_pair {|k,v|
+      set_param(k, v)
+    }
+  end
 
   # Add a param value (can be called multiply for the same param key)
   def add_param(k, v)
     oldval = @params[k]
     if oldval
       @params[k] = oldval.is_a?(Array) ? oldval + [v] :  [oldval, v]
+      @params[k].flatten!
     else
       @params[k] = v
     end
@@ -200,10 +214,10 @@ class Url
   end
 
   # Ensure url contains a server + scheme section, eg converts '/foo' into 'http://example.com/foo'.
-  def make_absolute(secure = false)
+  def make_absolute(secure = false, server = nil)
     unless absolute? && secure? == secure
-      raise 'No default server in Url#make_absolute' unless @server || Url.default_server
-      @server = Url.default_server unless @server
+      raise 'No default server set for Url#make_absolute' unless server || @server || Url.default_server
+      @server ||= (server || Url.default_server)
       unless @scheme
         @scheme = Url.default_scheme 
         @port = nil

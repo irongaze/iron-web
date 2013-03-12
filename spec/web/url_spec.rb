@@ -30,7 +30,7 @@ describe Url do
     u.port.should == 819
     u.path.should == '/this/is-a-bunch.jpg'
     u.params['of'].should == 'crazy'
-    u.params['free[]'].should == '55'
+    u.params['free'].should == ['55']
     u.fragment.should == 'now'
   end
   
@@ -60,6 +60,7 @@ describe Url do
     u = Url.new('/scores')
     u.add_param('soccer', '123')
     u.add_param('soccer', '456')
+    u.to_s.should match(/soccer\[\]=/)
     u = Url.parse(u.to_s)
     val = u.params['soccer']
     val.should be_an(Array)
@@ -92,6 +93,11 @@ describe Url do
     u.relative?.should be_true
     Url.default_server = 'irongaze.com'
     u.make_absolute.should == 'http://irongaze.com/bar'
+  end
+  
+  it 'should allow explicit servers in make_absolute' do
+    u = Url.parse('/bob')
+    u.make_absolute(true, 'microsoft.com').should == 'https://microsoft.com/bob'
   end
   
   it 'should escape params correctly' do
