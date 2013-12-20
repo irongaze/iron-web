@@ -187,7 +187,7 @@ class Color
 
   # Compute our overall brightness, using perception-based weighting, from 0.0 to 1.0
   def brightness
-    (0.2126 * self.r + 0.7152 * self.g + 0.0722 * self.b)
+    (0.2126 * self.r + 0.7152 * self.g + 0.0722 * self.b) / 255.0
   end
   
   def dark?

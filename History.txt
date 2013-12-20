@@ -1,3 +1,7 @@
+== 1.1.2 / 2013-03-13
+
+* Fix bug in Color#brightness where brightness values weren't normalized to 0.0-1.0 range
+
 == 1.1.1 / 2013-03-13
 
 * Handle setting Url params with keys, accessing with keys using #get_param
