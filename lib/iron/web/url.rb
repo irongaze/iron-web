@@ -62,17 +62,18 @@ class Url
     unless params.empty?
       str += '?'
       str += params.collect do |k,v|
+        k = k.to_s
         if v.is_a?(Array)
           k = k.gsub('[]','')
           v.collect do |vs|
             val = vs.respond_to?(:to_param) ? vs.to_param : vs
             val = val.to_s
-            CGI::escape(k.to_s) + '[]=' + CGI::escape(val)
+            CGI::escape(k) + '[]=' + CGI::escape(val)
           end
         else
           val = v.respond_to?(:to_param) ? v.to_param : v
           val = val.to_s
-          CGI::escape(k.to_s) + '=' + CGI::escape(val)
+          CGI::escape(k) + '=' + CGI::escape(val)
         end
       end.flatten.join('&')
     end

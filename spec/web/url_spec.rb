@@ -82,6 +82,11 @@ describe Url do
     u.to_s.should == '/?b=2'
   end
   
+  it 'should expand arrays in params' do
+    u = Url.build('/foo', :bar => [1,2])
+    u.to_s.should == '/foo?bar[]=1&bar[]=2'
+  end
+  
   it 'should support adding to the path' do
     u = Url.parse('/')
     u += 'main/site'
