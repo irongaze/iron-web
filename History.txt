@@ -1,3 +1,8 @@
+== 1.1.5 / 2015-09-08
+
+* Remove requirement to require 'iron/web' instead of more obvious 'iron-web'
+* Add Html.escape_javascript to help with building javascript attributes like onclick
+
 == 1.1.4 / 2015-01-27
 
 * Update to use latest iron-extensions gem

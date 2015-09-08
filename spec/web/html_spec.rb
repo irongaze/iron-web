@@ -17,4 +17,16 @@ describe Html do
     end.should == "<!-- Important stuff -->\n\n<h1>\n  Da header\n</h1>\n"
   end
   
+  it 'should escape javascript' do
+    {
+      'abc' => 'abc',
+      nil => '',
+      'a "quote"' => 'a \\"quote\\"',
+      "single's quotin'" => "single\\'s quotin\\'",
+      "abc\r\n123" => 'abc\n123'
+    }.each_pair do |src, res|
+      Html.escape_javascript(src).should == res
+    end
+  end
+  
 end

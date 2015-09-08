@@ -53,7 +53,7 @@ A set of classes useful in the generation of HTML content.
 
 To use:
 
-    require 'iron/web'
+    require 'iron-web'
 
 Sample usage of all components:
     
@@ -78,7 +78,7 @@ Which would result in:
     <a href="http://irongaze.com#incoming">Say hello to my log file</a>
 
 Notice the darkened and correctly formatted CSS color value and the newly fragment-ized url.  
-HTML elements are build by calling their tag name on the Html instance.  Similarly, element
+HTML elements are built by calling their tag name on the Html instance.  Similarly, element
 attributes are added by calling the attribute's name on the element instance, or by simply
 setting them during construction.
 
