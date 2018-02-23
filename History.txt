@@ -1,3 +1,7 @@
+== 1.1.6 / 2018-02-23
+
+* Add ability to set a default port for Url#make_absolute
+
 == 1.1.5 / 2015-09-08
 
 * Remove requirement to require 'iron/web' instead of more obvious 'iron-web'

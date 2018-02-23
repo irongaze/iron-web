@@ -38,6 +38,14 @@ class Url
     @default_server = server
   end
 
+  def self.default_port
+    @default_port
+  end
+  
+  def self.default_port=(port)
+    @default_port = port
+  end
+
   def self.default_scheme
     @default_scheme || 'http'
   end
@@ -220,13 +228,13 @@ class Url
   end
 
   # Ensure url contains a server + scheme section, eg converts '/foo' into 'http://example.com/foo'.
-  def make_absolute(secure = false, server = nil)
+  def make_absolute(secure = false, server = :default, port = :default)
     unless absolute? && secure? == secure
-      raise 'No default server set for Url#make_absolute' unless server || @server || Url.default_server
-      @server ||= (server || Url.default_server)
+      raise 'No default server set for Url#make_absolute' unless server != :default || @server || Url.default_server
+      @server ||= server == :default ? Url.default_server : server
       unless @scheme
         @scheme = Url.default_scheme 
-        @port = nil
+        @port = port == :default ? Url.default_port : port
       end
       if secure
         raise "No secure scheme for scheme #{@scheme} in Url#make_absolute" unless SECURE_SCHEME_MAPPING[@scheme]

@@ -1,5 +1,10 @@
 describe Url do
   
+  before do
+    Url.default_port = nil
+    Url.default_server = nil
+  end
+  
   it 'should parse url paths' do
     {
       '/' => '/',
@@ -98,6 +103,13 @@ describe Url do
     u.relative?.should be_true
     Url.default_server = 'irongaze.com'
     u.make_absolute.should == 'http://irongaze.com/bar'
+  end
+  
+  it 'should support ports in absolute URL generation' do
+    u = Url.parse('/bar')
+    Url.default_server = 'irongaze.com'
+    Url.default_port = '3000'
+    u.make_absolute.should == 'http://irongaze.com:3000/bar'
   end
   
   it 'should allow explicit servers in make_absolute' do
